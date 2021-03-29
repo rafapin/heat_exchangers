@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es-co">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Intercambiadores</title>
+    
+    <link href="libraries/bootstrap-5.0.0-beta2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="libraries/bootstrap-5.0.0-beta2-dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    
+   <div class="row mt-4">
+        <div class="col-2"></div>
+        <div class="col-8 card"> 
+            <div class="row" >
+                <div class="col-12">
+                    <h3 class="text-center mt-3 mb-3">App Intercambiadores</h3>
+                    <hr/>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <form id="form" onsubmit="return calc();" class="row g-3" validate>
+                        
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Fluido Caliente</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Fluido Frio</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Intercambiador</button>
+                            </li>
+                          </ul>
+                          <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                               
+                                <div class="form-group mb-3">
+                                    <label for="tipo_cal" class="form-label">Tipo de fluido caliente</label>
+                                    <select id="tipo_cal" class="form-control" required>
+                                        <option selected value="">Elige una opción</option>
+                                        <option value="1">Agua</option>
+                                        <option value="2">Aceite de Motor</option>
+                                        <option value="3">Glicerina</option>
+                                        <option value="4">Alcohol Etílico</option>
+                                        <option value="5">Amoniaco</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="T_i_cal" class="form-label">Temperatura de entrada fluido caliente <strong>[°C]</strong></label>
+                                    <input id="T_i_cal" type="number" step="0.01" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="m_cal" class="form-label">Flujo Másico Caliente<strong>[Kg/s]</strong> </label>
+                                    <input id="m_cal" type="number" step="0.01" class="form-control" required>
+                                </div>
+                                
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="form-group mb-3">
+                                    <label for="tipo_frio" class="form-label">Tipo de fluido Frío</label>
+                                    <select id="tipo_frio" class="form-control" required>
+                                        <option selected value="">Elige una opción</option>
+                                        <option value="1">Agua</option>
+                                        <option value="2">Aceite de Motor</option>
+                                        <option value="3">Glicerina</option>
+                                        <option value="4">Alcohol Etílico</option>
+                                        <option value="5">Amoniaco</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="T_i_frio" class="form-label">Temperatura de entrada Fluido Frio <strong>[°C]</strong></label>
+                                    <input id="T_i_frio" type="number" step="0.01" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="m_frio" class="form-label">Flujo Másico Frio <strong>[Kg/s]</strong></label>
+                                    <input id="m_frio" type="number" step="0.01" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="form-group mb-3">
+                                    <label for="tipo_int" class="form-label">Tipo de Intercambiador</label>
+                                    <select id="tipo_int" class="form-control" required>
+                                        <option selected value="">Elige una opción</option>
+                                        <option value="1">Doble Tubo: Flujo Paralelo</option>
+                                        <option value="2">Doble Tubo: Contraflujo</option>
+                                        <option value="3">Tubos y coraza: Un paso por la coraza y 2, 4, ... por los Tubos</option>
+                                        <option value="4">Flujo cruzado: Los dos fluidos en flujo no mezclado</option>
+                                        <option value="5">Flujo cruzado: Cmáx mezclado,Cmín no mezclado</option>
+                                        <option value="6">Flujo cruzado: Cmín mezclado, Cmáx no mezclado</option>
+                                        <option value="7">Todos los intercambiadores con c=0</option>
+                                    </select>
+                                    
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="U" class="form-label">Coeficiente Global de Transferencia de Calor <strong>[W/m<sup>2</sup>K]</strong></label>
+                                    <input id="U" type="number" step="0.01" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="A" class="form-label">Area Superficial de Intercambiador <strong>[m<sup>2</sup>]</strong></label>
+                                    <input id="A" type="number" step="0.01" class="form-control" required>
+                                </div>
+                            </div>
+                          </div>
+                   
+                    <button class="btn btn-success mb-3 col-sm-12" type="submit">Calcular</button>
+                    </form>
+                </div>
+        
+                <div class="col-sm-12 col-lg-6 mb-1">
+                    <div class="card border-primary mb-3" style="max-width: 100%;">
+                        <div class="card-header"><strong>Efectividad </strong></div>
+                        <div class="card-body text-primary text-center">
+                          <h2 class="card-title" id="eta"> </h2>
+                        </div>
+                    </div>
+
+                    <div class="card border-success mb-3" style="max-width: 100%;">
+                        <div class="card-header"><strong>Temperatura salida del fluido Caliente </strong></div>
+                        <div class="card-body text-success text-center">
+                          <h2 class="card-title" id="T_o_cal"> </h2>
+                        </div>
+                    </div>
+
+                    <div class="card border-danger mb-3" style="max-width: 100%;">
+                        <div class="card-header"><strong>Temperatura salida del fluido Frio </strong></div>
+                        <div class="card-body text-danger text-center">
+                          <h2 class="card-title" id="T_o_frio"> </h2>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+        
+        
+        
+        </div>
+        <div class="col-2"></div>
+    </div>
+    
+
+    <script src="app.js"></script>
+</body>
+</html>
