@@ -56,7 +56,16 @@ function calc()
     eta.innerHTML = e.toFixed(3);
     T_o_cal.innerHTML = T_o_c.toFixed(2) + " °C";
     T_o_frio.innerHTML = T_o_f.toFixed(2) + " °C";
+    show();
     return false;
+}
+
+function show(){
+    let divResult = document.getElementById("divResult");
+    let divData = document.getElementById("divData");
+    divResult.style.display = "block";
+    divData.classList.remove("col-lg-12");
+    divData.classList.add("col-lg-6");
 }
 
 function Cp(fluido)
